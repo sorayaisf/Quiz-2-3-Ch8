@@ -1,28 +1,47 @@
 import React from "react";
 
-export default function List() {
+export default function List({ data }) {
+  console.log(data);
   return (
-    <div className="list-group">
-      <div className="list-group-item list-group-item-action">
-        <div className="d-flex w-100 justify-content-between">
-          <h5 className="mb-1">John Doe</h5>
+    <div className="list-group container">
+      {data.map((items, index) => {
+        return (
           <div>
-            <button className="btn btn-sm btn-link">Edit</button>
-            <button className="btn btn-sm btn-link">Del</button>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Username</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Experience</th>
+                  <th scope="col">Level</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">John Doe</th>
+                  <td>john@yahoo.com</td>
+                  <td>Great</td>
+                  <td>Beginner</td>
+                </tr>
+                <tr>
+                  <th scope="row">Mark Jason</th>
+                  <td>mark@yahoo.com</td>
+                  <td>Great</td>
+                  <td>Pro</td>
+                </tr>
+              </tbody>
+            </table>
+            <div>
+              <a href="" class="btn btn-sm btn-primary">
+                Edit Data
+              </a>
+              <a href="" class="btn btn-sm btn-danger">
+                Delete Data
+              </a>
+            </div>
           </div>
-        </div>
-        <p className="mb-1">08815646413</p>
-      </div>
-      <div className="list-group-item list-group-item-action">
-        <div className="d-flex w-100 justify-content-between">
-          <h5 className="mb-1">Alex Pick</h5>
-          <div>
-            <button className="btn btn-sm btn-link">Edit</button>
-            <button className="btn btn-sm btn-link">Del</button>
-          </div>
-        </div>
-        <p className="mb-1">08815646413</p>
-      </div>
+        );
+      })}
     </div>
   );
 }
