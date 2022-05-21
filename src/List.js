@@ -21,6 +21,14 @@ export default function List({ data, handleDelete }) {
                   <td>{items.email}</td>
                   <td>{items.experience}</td>
                   <td>{items.lvl}</td>
+                  <td>
+                    <button
+                      className="btn btn-sm btn-danger"
+                      onClick={() => handleDelete(index)}
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             );
