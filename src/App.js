@@ -1,17 +1,17 @@
 import List from "./List";
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
   const [contacts, setContacts] = useState([
     {
-      username: "John Doe",
+      username: "John",
       email: "john@yahoo.com",
       experience: "great",
       lvl: "beginner",
     },
     {
-      username: "Mark Jason",
+      username: "Mark",
       email: "mark@yahoo.com",
       experience: "great",
       lvl: "pro",
@@ -19,25 +19,37 @@ function App() {
   ]);
 
   const [user, setUser] = useState({
-    name: "",
-    telp: "",
+    username: "",
+    email: "",
+    experience: "",
+    lvl: "",
   });
 
   const handleChange = (e, name) => {
     const value = e.target.value;
+    console.log({ value });
     setUser({ ...user, [name]: value });
   };
 
-  const handleSubmit = () => {
-    // setContacts({ ...contacts }, { ...user });
-    contacts.push(user);
-
-    console.log(user, [...contacts]);
+  const handleSubmit = (e) => {
+    const currentData = [...contacts];
+    currentData.push(user);
+    setContacts(currentData);
+    setUser({
+      username: "",
+      email: "",
+      experience: "",
+      lvl: "",
+    });
   };
 
-  useEffect(() => {
-    setContacts(contacts);
-  }, [contacts]);
+  const handleDelete = (i) => {
+    const currentData = [...contacts];
+    currentData.splice(i, 1);
+    setContacts(currentData);
+  };
+
+  console.log({ user });
 
   return (
     <div className="App">
@@ -50,6 +62,8 @@ function App() {
             type="text"
             className="form-control"
             name="username"
+            value={user.username}
+            required
           />
         </div>
         <div className="form-group mt-3">
@@ -59,6 +73,8 @@ function App() {
             type="text"
             className="form-control"
             name="email"
+            value={user.email}
+            required
           />
         </div>
         <div className="form-group mt-3">
@@ -68,6 +84,8 @@ function App() {
             type="text"
             className="form-control"
             name="experience"
+            value={user.experience}
+            required
           />
         </div>
         <div className="form-group mt-3">
@@ -77,12 +95,14 @@ function App() {
             type="text"
             className="form-control"
             name="lvl"
+            value={user.lvl}
+            required
           />
         </div>
         <div>
           <button
             type="button"
-            onClick={handleSubmit}
+            onClick={(e) => handleSubmit(e)}
             className="btn btn-warning w-100 mt-3"
           >
             Submit
@@ -90,7 +110,7 @@ function App() {
         </div>
       </form>
 
-      <List data={contacts} />
+      <List data={contacts} handleDelete={handleDelete} />
     </div>
   );
 }
